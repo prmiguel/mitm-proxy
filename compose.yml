@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  mitmproxy:
+    image: mitmproxy/mitmproxy
+    container_name: mitmproxy
+    entrypoint: "mitmweb --web-host 0.0.0.0"
+    networks:
+      - app-network
+    ports:
+      - '9080:8080'
+      - '9081:8081'
+  desktop:
+    image: 'kasmweb/desktop:1.14.0'
+    container_name: desktop
+    ports:
+        - '9601:6901'
+    environment:
+        - VNC_PW=password
+        - http_proxy=mitmproxy:9080
+    shm_size: '1gb'
+    networks:
+      - app-network
+networks:
+  app-network:
