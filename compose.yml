@@ -2,24 +2,43 @@ version: '3.7'
 
 services:
   mitmproxy:
-    image: mitmproxy/mitmproxy
+    image: mitmproxyabc
+    build: .
     container_name: mitmproxy
-    entrypoint: "mitmweb --web-host 0.0.0.0"
+    entrypoint: "mitmweb --web-host 0.0.0.0 -s /addons/modify_response.py"
     networks:
       - app-network
     ports:
       - '9080:8080'
       - '9081:8081'
+    volumes:
+      - $PWD/.mitmproxy:/root/.mitmproxy
+      # - $PWD/addons:/addons
+      # - /root/.mitmproxy
+    # healthcheck:
+    #   test: ["CMD-SHELL", "curl -f http://localhost:8081 || exit 1"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 1
+    #   start_period: 30s
   desktop:
     image: 'kasmweb/desktop:1.14.0'
     container_name: desktop
     ports:
-        - '9601:6901'
+        - '9901:6901'
+    # depends_on:
+    #   - mitmproxy
+      # mitmproxy:
+      #   condition: service_healthy
     environment:
         - VNC_PW=password
-        - http_proxy=mitmproxy:9080
+        # - HTTP_PROXY=http://mitmproxy:8080
     shm_size: '1gb'
     networks:
       - app-network
+    # volumes:
+    #   - $PWD/.mitmproxy/mitmproxy-ca-cert.pem:/usr/local/share/ca-certificates/mitmproxy.crt
 networks:
   app-network:
+
+# volumes:
