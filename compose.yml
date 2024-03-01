@@ -5,7 +5,7 @@ services:
     image: mitmproxyserver
     build: ./proxy
     container_name: mitmproxyserver
-    entrypoint: "mitmweb --web-host 0.0.0.0 -s /addons/modify_response.py; chmod 777 -R /root/.mitmproxy"
+    entrypoint: "mitmweb --web-host 0.0.0.0 -s /addons/modify_response.py"
     networks:
       - app-network
     ports:
@@ -13,39 +13,30 @@ services:
       - '6081:8081'
     volumes:
       - dotmitmproxy:/root/.mitmproxy:rw
-      # - $PWD/addons:/addons
-      # - /root/.mitmproxy
-    # healthcheck:
-    #   test: ["CMD-SHELL", "curl -f http://localhost:6081 || exit 1"]
-    #   interval: 30s
-    #   timeout: 60s
-    #   retries: 3
-    #   start_period: 30s
+      - addonsmitmproxy:/addons:ro
   desktopclient:
     image: 'desktopclient'
     container_name: desktopclient
     build: ./desktop
     ports:
         - '6901:6901'
-    # depends_on:
-    #   - mitmproxy
-      # mitmproxy:
-      #   condition: service_healthy
     environment:
         - VNC_PW=password
-        - PROXY_SERVER=192.168.0.101:9080
-        - HTTP_PROXY=http://192.168.0.101:9080
-        - HTTPS_PROXY=http://192.168.0.101:9080
-        - http_proxy=http://192.168.0.101:9080
-        - https_proxy=http://192.168.0.101:9080
+        - PROXY_SERVER=$PROXY_SERVER
+        - HTTP_PROXY=http://$PROXY_SERVER
+        - HTTPS_PROXY=http://$PROXY_SERVER
+        - http_proxy=http://$PROXY_SERVER
+        - https_proxy=http://$PROXY_SERVER
         - CA_CERT=$CA_CERT
     shm_size: '1gb'
     networks:
       - app-network
     volumes:
       - dotmitmproxy:/dotmitmproxy:ro
+      - addonsmitmproxy:/addons:rw
 networks:
   app-network:
 
 volumes:
   dotmitmproxy:
+  addonsmitmproxy:
