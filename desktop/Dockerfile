@@ -8,6 +8,7 @@ WORKDIR $HOME
 COPY ./scripts/set_proxy_conf.sh $STARTUPDIR/set_proxy_conf.sh
 COPY ./scripts/kasm_default_profile.sh $STARTUPDIR/kasm_default_profile.sh
 COPY ./scripts/install_ca_cert.sh $STARTUPDIR/install_ca_cert.sh
+COPY ./scripts/check_proxy_server.sh $STARTUPDIR/check_proxy_server.sh
 RUN mkdir -p $INST_SCRIPTS/certificates && \
     chmod 777 $INST_SCRIPTS/certificates && \
     touch $INST_SCRIPTS/certificates/ca.crt && \

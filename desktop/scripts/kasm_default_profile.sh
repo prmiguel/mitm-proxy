@@ -55,6 +55,8 @@ verify_profile_config
 
 rm -rf $HOME/.config/pulse
 
+CHECK_PROXY_SCRIPT_PATH="/dockerstartup/check_proxy_server.sh"
+eval '"$CHECK_PROXY_SCRIPT_PATH"'
 SCRIPT_PATH="/dockerstartup/set_proxy_conf.sh"
 eval '"$SCRIPT_PATH"'
 CERT_SCRIPT_PATH="/dockerstartup/install_ca_cert.sh"
