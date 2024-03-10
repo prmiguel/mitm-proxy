@@ -1,10 +1,10 @@
 version: '3.7'
 
 services:
-  mitmproxyserver:
-    image: mitmproxyserver
+  proxyserver:
+    image: proxyserver
     build: ./proxy
-    container_name: mitmproxyserver
+    container_name: proxyserver
     entrypoint: "mitmweb --web-host 0.0.0.0 -s /addons/modify_response.py"
     networks:
       - app-network
@@ -14,14 +14,14 @@ services:
     volumes:
       - dotmitmproxy:/home/mitmproxy/.mitmproxy:rw
       - addonsmitmproxy:/addons:ro
-  desktopclient:
-    image: 'desktopclient'
-    container_name: desktopclient
+  proxyclient:
+    image: 'proxyclient'
+    container_name: proxyclient
     build: ./desktop
     ports:
         - '6901:6901'
     depends_on:
-      - mitmproxyserver
+      - proxyserver
     environment:
         - VNC_PW=password
         - PROXY_SERVER=$PROXY_SERVER
