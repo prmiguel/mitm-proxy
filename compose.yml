@@ -20,6 +20,8 @@ services:
     build: ./desktop
     ports:
         - '6901:6901'
+    depends_on:
+      - mitmproxyserver
     environment:
         - VNC_PW=password
         - PROXY_SERVER=$PROXY_SERVER
