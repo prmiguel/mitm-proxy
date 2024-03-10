@@ -29,7 +29,7 @@ services:
         - HTTPS_PROXY=http://$PROXY_SERVER
         - http_proxy=http://$PROXY_SERVER
         - https_proxy=http://$PROXY_SERVER
-        - CA_CERT=$CA_CERT
+        # - CA_CERT=$CA_CERT
     shm_size: '1gb'
     networks:
       - app-network
