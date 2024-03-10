@@ -16,6 +16,7 @@ RUN mkdir -p $INST_SCRIPTS/certificates && \
     chmod 777 /usr/lib/firefox/distribution && \
     chmod 777 /etc/opt/chrome/policies/managed && \
     chmod 777 /usr/local/share/ca-certificates && \
-    chmod 777 /etc/ssl/certs
+    chmod 777 /etc/ssl/certs && \
+    mv /usr/share/backgrounds/brad-huchteman-stone-mountain.jpg /usr/share/backgrounds/bg_default.png
 
 USER 1000
