@@ -12,7 +12,7 @@ services:
       - '6080:8080'
       - '6081:8081'
     volumes:
-      - dotmitmproxy:/root/.mitmproxy:rw
+      - dotmitmproxy:/home/mitmproxy/.mitmproxy:rw
       - addonsmitmproxy:/addons:ro
   desktopclient:
     image: 'desktopclient'

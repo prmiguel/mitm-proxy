@@ -3,8 +3,10 @@ set -ex
 # apt-get update
 # apt-get install -y libnss3-tools
 
+# ls -la /dotmitmproxy
 CERT_FILE="${INST_SCRIPTS}/certificates/ca.crt"
-echo "$CA_CERT" > "$CERT_FILE"
+# echo "$CA_CERT" > "$CERT_FILE"
+cat /dotmitmproxy/mitmproxy-ca.pem > "$CERT_FILE"
 CERT_NAME="Custom Root CA"
 
 # Install the cert into the system cert store
