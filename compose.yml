@@ -17,7 +17,7 @@ services:
   proxyclient:
     image: 'proxyclient'
     container_name: proxyclient
-    build: ./desktop
+    build: ./client
     ports:
         - '6901:6901'
     depends_on:
