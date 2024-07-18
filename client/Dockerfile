@@ -1,4 +1,5 @@
 FROM kasmweb/desktop:1.15.0
+LABEL maintainer="prmiguel <miangel-pr@outlook.com>"
 USER root
 RUN apt update && apt install -y jq kate
 ENV HOME /home/kasm-default-profile
