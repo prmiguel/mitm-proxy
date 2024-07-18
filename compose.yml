@@ -3,7 +3,7 @@ version: '3.7'
 services:
   proxyserver:
     image: proxyserver
-    build: ./proxy
+    build: ./server
     container_name: proxyserver
     entrypoint: "mitmweb --web-host 0.0.0.0 -s /addons/modify_response.py"
     networks:
