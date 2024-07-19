@@ -1,8 +1,8 @@
-version: '3.7'
+---
 
 services:
   proxyserver:
-    image: proxyserver
+    image: ghcr.io/prmiguel/mitm-proxy-server:main
     build: ./server
     container_name: proxyserver
     entrypoint: "mitmweb --web-host 0.0.0.0 -s /addons/modify_response.py"
@@ -15,7 +15,7 @@ services:
       - dotmitmproxy:/home/mitmproxy/.mitmproxy:rw
       - addonsmitmproxy:/addons:ro
   proxyclient:
-    image: 'proxyclient'
+    image: ghcr.io/prmiguel/mitm-proxy-client:main
     container_name: proxyclient
     build: ./client
     ports:
