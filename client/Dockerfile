@@ -18,6 +18,7 @@ RUN mkdir -p $INST_SCRIPTS/certificates && \
     chmod 777 /etc/opt/chrome/policies/managed && \
     chmod 777 /usr/local/share/ca-certificates && \
     chmod 777 /etc/ssl/certs && \
-    mv /usr/share/backgrounds/brad-huchteman-stone-mountain.jpg /usr/share/backgrounds/bg_default.png
+    mv /usr/share/backgrounds/brad-huchteman-stone-mountain.jpg /usr/share/backgrounds/bg_default.png && \
+    sed -i 's/vncserver $DISPLAY /vncserver $DISPLAY -disableBasicAuth /' /dockerstartup/vnc_startup.sh
 
 USER 1000
