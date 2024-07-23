@@ -1,6 +1,10 @@
 # mitm-proxy
 
-![image](https://github.com/user-attachments/assets/b9b92583-6315-473e-8e61-5fe11ba51fe8)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/b9b92583-6315-473e-8e61-5fe11ba51fe8" alt="mitm-proxy"/>
+</p>
+
+---
 
 - **Client**
   - `Google Chrome`
