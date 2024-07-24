@@ -37,6 +37,19 @@ services:
     volumes:
       - dotmitmproxy:/dotmitmproxy:ro
       - addonsmitmproxy:/addons:rw
+  ide:
+    image: ghcr.io/prmiguel/mitm-proxy-ide:main
+    container_name: proxyide
+    environment:
+      - DEFAULT_WORKSPACE=/addons
+    volumes:
+      - addonsmitmproxy:/addons:rw
+    ports:
+      - 8443:8443
+    restart: unless-stopped
+    networks:
+      app-network:
+        ipv4_address: 172.28.5.3
 
 networks:
   app-network:
