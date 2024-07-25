@@ -47,7 +47,7 @@ services:
     volumes:
       - addonsmitmproxy:/addons:rw
     ports:
-      - 8443:8443
+      - 3000:3000
     restart: unless-stopped
     networks:
       app-network:
